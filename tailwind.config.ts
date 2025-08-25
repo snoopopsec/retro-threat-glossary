@@ -18,6 +18,11 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'retro': ['Creepster', 'Comic Sans MS', 'cursive'],
+				'cyber': ['Nosifer', 'Courier New', 'monospace'],
+				'body': ['Times New Roman', 'serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',

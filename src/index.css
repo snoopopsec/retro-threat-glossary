@@ -2,41 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* 90s RETRO THREAT GLOSSARY DESIGN SYSTEM */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* 90s nightmare color palette */
+    --background: 0 0% 5%;
+    --foreground: 60 100% 90%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 85% 8%;
+    --card-foreground: 60 100% 90%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 85% 8%;
+    --popover-foreground: 60 100% 90%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 0 85% 45%;
+    --primary-foreground: 60 100% 90%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 240 85% 15%;
+    --secondary-foreground: 60 100% 90%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 240 85% 15%;
+    --muted-foreground: 60 80% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 60 100% 50%;
+    --accent-foreground: 0 0% 5%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 60 100% 90%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 85% 20%;
+    --input: 0 85% 12%;
+    --ring: 60 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0rem;
+    
+    /* 90s specific colors */
+    --neon-green: 120 100% 50%;
+    --neon-pink: 320 100% 50%;
+    --cyber-blue: 195 100% 50%;
+    --warning-yellow: 60 100% 50%;
+    
+    /* Retro effects */
+    --shadow-neon: 0 0 20px hsl(var(--accent));
+    --shadow-red: 0 0 20px hsl(var(--destructive));
+    --shadow-blue: 0 0 20px hsl(var(--cyber-blue));
+    
+    /* Animated gradients */
+    --gradient-threat: linear-gradient(45deg, hsl(var(--destructive)), hsl(var(--primary)));
+    --gradient-cyber: linear-gradient(135deg, hsl(var(--cyber-blue)), hsl(var(--neon-green)));
+    
+    /* Typography */
+    --font-retro: 'Creepster', 'Comic Sans MS', cursive;
+    --font-cyber: 'Nosifer', 'Courier New', monospace;
+    --font-body: 'Times New Roman', serif;
 
     --sidebar-background: 0 0% 98%;
 
@@ -55,42 +74,15 @@ All colors MUST be HSL.
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  .light {
+    /* Light mode for 90s theme - even more garish */
+    --background: 60 100% 95%;
+    --foreground: 0 0% 5%;
+    --card: 60 100% 90%;
+    --card-foreground: 0 0% 5%;
+    --primary: 0 100% 40%;
+    --accent: 240 100% 50%;
+    --border: 0 85% 60%;
   }
 }
 
@@ -101,5 +93,87 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(var(--destructive)) 2px, transparent 2px),
+      radial-gradient(circle at 75% 75%, hsl(var(--accent)) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-attachment: fixed;
+  }
+  
+  /* 90s Retro Effects */
+  .retro-title {
+    font-family: var(--font-retro);
+    text-shadow: 3px 3px 0px hsl(var(--destructive)), 
+                 6px 6px 0px hsl(var(--accent)),
+                 9px 9px 0px hsl(var(--cyber-blue));
+    animation: text-glow 2s ease-in-out infinite alternate;
+  }
+  
+  .cyber-text {
+    font-family: var(--font-cyber);
+    color: hsl(var(--neon-green));
+    text-shadow: 0 0 10px hsl(var(--neon-green));
+  }
+  
+  .threat-card {
+    border: 3px solid hsl(var(--border));
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--primary)) 100%);
+    box-shadow: var(--shadow-red);
+    transform: rotate(-1deg);
+    transition: all 0.3s ease;
+  }
+  
+  .threat-card:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: var(--shadow-neon);
+  }
+  
+  .neon-border {
+    border: 2px solid hsl(var(--accent));
+    box-shadow: 
+      0 0 5px hsl(var(--accent)),
+      inset 0 0 5px hsl(var(--accent));
+    animation: border-pulse 1.5s ease-in-out infinite alternate;
+  }
+  
+  @keyframes text-glow {
+    from { 
+      text-shadow: 3px 3px 0px hsl(var(--destructive)), 
+                   6px 6px 0px hsl(var(--accent)),
+                   9px 9px 0px hsl(var(--cyber-blue));
+    }
+    to { 
+      text-shadow: 3px 3px 0px hsl(var(--accent)), 
+                   6px 6px 0px hsl(var(--cyber-blue)),
+                   9px 9px 0px hsl(var(--destructive));
+    }
+  }
+  
+  @keyframes border-pulse {
+    from { box-shadow: 0 0 5px hsl(var(--accent)), inset 0 0 5px hsl(var(--accent)); }
+    to { box-shadow: 0 0 20px hsl(var(--accent)), inset 0 0 10px hsl(var(--accent)); }
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  .blink {
+    animation: blink 1s infinite;
+  }
+  
+  /* Marquee styles */
+  .marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    animation: marquee 15s linear infinite;
+  }
+  
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
   }
 }

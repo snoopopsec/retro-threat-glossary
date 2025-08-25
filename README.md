@@ -1,73 +1,114 @@
-# Welcome to your Lovable project
+# 🕷️ RETRO THREAT GLOSSARY 🕷️
 
-## Project info
+A radical 90s-styled threat actor database featuring APT groups, ransomware gangs, and cyber adversaries with all the retro flair you can handle!
 
-**URL**: https://lovable.dev/projects/58d84f21-baaa-498d-91d0-d9c80f954fcc
+## 🎮 Features
 
-## How can I edit this code?
+- **90s Web Design**: Complete with neon colors, Comic Sans fonts, blinking text, and tiled backgrounds
+- **Searchable Database**: Search through threat actors by name, aliases, malware, countries, industries, and more
+- **Detailed Profiles**: Comprehensive information including MITRE ATT&CK techniques, target industries, and malware arsenal
+- **Responsive Design**: Works on all devices while maintaining that nostalgic 90s feel
+- **GitHub Pages Ready**: Configured for easy deployment to GitHub Pages
 
-There are several ways of editing your application.
+## 🚀 Deployment to GitHub Pages
 
-**Use Lovable**
+1. **Connect to GitHub**:
+   - In Lovable, click the GitHub button in the top right
+   - Authorize the Lovable GitHub App
+   - Create a new repository
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/58d84f21-baaa-498d-91d0-d9c80f954fcc) and start prompting.
+2. **Enable GitHub Pages**:
+   - Go to your GitHub repository
+   - Navigate to Settings → Pages
+   - Select "Deploy from a branch"
+   - Choose "main" branch and "/ (root)" folder
+   - Click Save
 
-Changes made via Lovable will be committed automatically to this repo.
+3. **Configure for GitHub Pages**:
+   - Your site will be available at: `https://yourusername.github.io/your-repo-name`
+   - Wait a few minutes for the deployment to complete
 
-**Use your preferred IDE**
+## 📝 Adding New Threat Actors
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+To add new threat actors, edit the `src/data/threatActors.ts` file. Each threat actor should follow this structure:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```typescript
+{
+  id: "unique-id",
+  name: "THREAT ACTOR NAME",
+  aliases: ["Alias 1", "Alias 2"],
+  type: "APT" | "Ransomware" | "eCrime" | "Nation State" | "Hacktivist",
+  origin: "Country or Region",
+  firstSeen: "Date",
+  lastSeen: "Date", 
+  motivation: "Criminal" | "Espionage" | "Destruction" | "Hacktivism",
+  description: "Detailed description of the threat actor...",
+  malwareUsed: ["Malware 1", "Malware 2"],
+  targetIndustries: ["Industry 1", "Industry 2"],
+  targetCountries: ["Country 1", "Country 2"],
+  techniques: ["T1021.001", "T1047"], // MITRE ATT&CK technique IDs
+  status: "Active" | "Inactive" | "Unknown",
+  intelReports: 123, // Number of intelligence reports
+  vulnerabilities: 456 // Number of associated vulnerabilities
+}
 ```
 
-**Edit a file directly in GitHub**
+## 🎨 90s Design Elements
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+The website features authentic 90s web design elements:
 
-**Use GitHub Codespaces**
+- **Fonts**: Creepster and Nosifer Google Fonts for that horror/retro feel
+- **Colors**: Dark background with neon accents (red, blue, yellow, green)
+- **Effects**: 
+  - Blinking text for active threats
+  - Neon glowing borders
+  - Animated text shadows
+  - Scrolling marquee header
+  - Tiled background patterns
+- **Layout**: Asymmetrical cards with borders and retro styling
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🔍 Search Functionality
 
-## What technologies are used for this project?
+The search feature allows users to find threat actors by:
+- Threat actor names
+- Aliases and alternative names
+- Malware families used
+- Target industries
+- Target countries
+- Origin countries
+- Threat actor types
+- Motivations
 
-This project is built with:
+## 🛠️ Technology Stack
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **React + TypeScript**: Modern web development
+- **Tailwind CSS**: Utility-first styling
+- **Vite**: Fast build tool
+- **Shadcn/ui**: Accessible UI components
+- **Lucide React**: Icons
 
-## How can I deploy this project?
+## 📚 Data Sources
 
-Simply open [Lovable](https://lovable.dev/projects/58d84f21-baaa-498d-91d0-d9c80f954fcc) and click on Share -> Publish.
+All threat intelligence data is based on publicly available information and should be used for educational and research purposes only.
 
-## Can I connect a custom domain to my Lovable project?
+## 🎯 Project Structure
 
-Yes, you can!
+```
+src/
+├── components/
+│   ├── ThreatActorCard.tsx    # Individual threat actor cards
+│   ├── ThreatActorModal.tsx   # Detailed view modal
+│   └── SearchBox.tsx          # Search functionality
+├── data/
+│   └── threatActors.ts        # Threat actor database
+└── pages/
+    └── Index.tsx              # Main page component
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🚨 Disclaimer
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This database is for educational and research purposes only. All information is based on publicly available threat intelligence reports and should not be used for malicious purposes.
+
+---
+
+*Built with 90s nostalgia and modern web technology* 🎮
