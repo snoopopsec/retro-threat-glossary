@@ -1,13 +1,17 @@
 import { useState, useMemo } from "react";
 import { ThreatActorCard } from "@/components/ThreatActorCard";
 import { ThreatActorModal } from "@/components/ThreatActorModal";
+import { ThreatActorManager } from "@/components/ThreatActorManager";
 import { SearchBox } from "@/components/SearchBox";
-import { threatActors, ThreatActor } from "@/data/threatActors";
+import { Button } from "@/components/ui/button";
+import { threatActors as initialThreatActors, ThreatActor } from "@/data/threatActors";
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedActor, setSelectedActor] = useState<ThreatActor | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showManager, setShowManager] = useState(false);
+  const [threatActors, setThreatActors] = useState<ThreatActor[]>(initialThreatActors);
 
   const filteredActors = useMemo(() => {
     if (!searchQuery.trim()) return threatActors;
@@ -34,6 +38,24 @@ const Index = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedActor(null);
+  };
+
+  const handleAddActor = (actor: ThreatActor) => {
+    setThreatActors(prev => [...prev, actor]);
+  };
+
+  const handleUpdateActor = (updatedActor: ThreatActor) => {
+    setThreatActors(prev => prev.map(actor => 
+      actor.id === updatedActor.id ? updatedActor : actor
+    ));
+  };
+
+  const handleImportActors = (newActors: ThreatActor[]) => {
+    setThreatActors(prev => {
+      const existingIds = new Set(prev.map(a => a.id));
+      const uniqueNewActors = newActors.filter(a => !existingIds.has(a.id));
+      return [...prev, ...uniqueNewActors];
+    });
   };
 
   return (
@@ -68,48 +90,69 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Search */}
-        <div className="mb-8">
-          <SearchBox 
-            value={searchQuery}
-            onChange={setSearchQuery}
-            placeholder="Search threat actors, malware, countries..."
-          />
-        </div>
-
-        {/* Results Count */}
+        {/* Management Toggle */}
         <div className="text-center mb-6">
-          <div className="inline-block neon-border p-2">
-            <span className="cyber-text font-bold">
-              {filteredActors.length} THREAT ACTORS FOUND
-            </span>
-          </div>
+          <Button
+            onClick={() => setShowManager(!showManager)}
+            className="bg-accent hover:bg-accent/80 font-cyber text-accent-foreground"
+          >
+            {showManager ? "👁️ VIEW DATABASE" : "⚙️ MANAGE ACTORS"}
+          </Button>
         </div>
 
-        {/* Threat Actor Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredActors.map((actor) => (
-            <ThreatActorCard
-              key={actor.id}
-              actor={actor}
-              onClick={() => handleActorClick(actor)}
-            />
-          ))}
-        </div>
-
-        {/* No Results */}
-        {filteredActors.length === 0 && (
-          <div className="text-center py-12">
-            <div className="threat-card p-8 inline-block">
-              <h3 className="retro-title text-2xl mb-4">
-                🚫 NO THREATS DETECTED 🚫
-              </h3>
-              <p className="font-body text-muted-foreground">
-                No threat actors match your search criteria. 
-                Try searching for APT groups, ransomware, or country names!
-              </p>
+        {showManager ? (
+          <ThreatActorManager
+            actors={threatActors}
+            onAddActor={handleAddActor}
+            onUpdateActor={handleUpdateActor}
+            onImportActors={handleImportActors}
+          />
+        ) : (
+          <>
+            {/* Search */}
+            <div className="mb-8">
+              <SearchBox 
+                value={searchQuery}
+                onChange={setSearchQuery}
+                placeholder="Search threat actors, malware, countries..."
+              />
             </div>
-          </div>
+
+            {/* Results Count */}
+            <div className="text-center mb-6">
+              <div className="inline-block neon-border p-2">
+                <span className="cyber-text font-bold">
+                  {filteredActors.length} THREAT ACTORS FOUND
+                </span>
+              </div>
+            </div>
+
+            {/* Threat Actor Grid */}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {filteredActors.map((actor) => (
+                <ThreatActorCard
+                  key={actor.id}
+                  actor={actor}
+                  onClick={() => handleActorClick(actor)}
+                />
+              ))}
+            </div>
+
+            {/* No Results */}
+            {filteredActors.length === 0 && (
+              <div className="text-center py-12">
+                <div className="threat-card p-8 inline-block">
+                  <h3 className="retro-title text-2xl mb-4">
+                    🚫 NO THREATS DETECTED 🚫
+                  </h3>
+                  <p className="font-body text-muted-foreground">
+                    No threat actors match your search criteria. 
+                    Try searching for APT groups, ransomware, or country names!
+                  </p>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
 
